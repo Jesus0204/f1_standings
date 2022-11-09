@@ -7,6 +7,8 @@ Hoy en día la Fórmula 1 se ha vuelto un depprte muy popular, por lo que cada v
 El programa permite crear nuevos pilotos, equipos, carreras y standings. Es importante mencionar que como todos los datos son conocidos, solo hay dos contructores, el parametrizado y el vacío. Después calcula los lugares de los pilotos y equipos con la información proporcionada. 
 Va a constar de un menu donde se va a poder agregar cada tipo de objeto, y recopilar información de los standings. 
 
+Se va a proporcionar una lista con los datos del 2022, pero también va a tener la opción de agregar nuevos pilotos y equipos si se quiere jugar con eso. Ambas opciones son posibles. 
+
 Se corre en consola y compila con g++
 
 ## Tipo de objetos
