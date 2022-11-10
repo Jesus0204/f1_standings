@@ -26,7 +26,7 @@ class Standings {
         void update_championship();
         void consultar_standing();
         void init_puntos_carrera();
-        void puntos_carrera();
+        void set_puntos_carrera();
         void actualizar_drivers_equipo();
 
 };
@@ -145,32 +145,32 @@ void Standings :: consultar_standing(){
 
 void Standings :: init_puntos_carrera(){
     for (int i = 0; i < tam_driver; i++){
-        drivers[i].puntos_carrera_driver(0.0);
+        drivers[i].setpuntos_carrera_driver(0.0);
     }
     actualizar_drivers_equipo();
 }
 
-void Standings :: puntos_carrera(){
+void Standings :: set_puntos_carrera(){
     int pun = 25;
     for (int i = 0; i < tam_driver; i++){
         if (i == 0){
-            drivers[i].puntos_carrera_driver(pun);
+            drivers[i].setpuntos_carrera_driver(pun);
         }
         else if (i == 1){
             pun -= 7;
-            drivers[i].puntos_carrera_driver(pun);
+            drivers[i].setpuntos_carrera_driver(pun);
         }
         else if (i >= 2 && i <= 3){
             pun -= 3;
-            drivers[i].puntos_carrera_driver(pun);
+            drivers[i].setpuntos_carrera_driver(pun);
         }
         else if (i >= 4 && i <= 8){
             pun -= 2;
-            drivers[i].puntos_carrera_driver(pun);
+            drivers[i].setpuntos_carrera_driver(pun);
         }
         else if (i == 9){
             pun -=1;
-            drivers[i].puntos_carrera_driver(pun);
+            drivers[i].setpuntos_carrera_driver(pun);
         }
     }
     /* Actualizar los drivers de equipos */
@@ -269,5 +269,5 @@ void Race :: agregrar_team(Team nuevo){
 }
 
 void Race :: puntos_carrera(){
-    carrera_st.puntos_carrera();
+    carrera_st.set_puntos_carrera();
 }

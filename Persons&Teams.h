@@ -53,7 +53,8 @@ class Driver: public Persona {
         string get_escuderia();
         int get_activo();
         float get_puntos();
-        void puntos_carrera_driver(float);
+        void setpuntos_carrera_driver(float);
+        void sumar_puntos_carrera(float);
 };
 
 Driver :: Driver(){
@@ -92,8 +93,12 @@ float Driver :: get_puntos(){
     return puntos;
 }
 
-void Driver :: puntos_carrera_driver(float pun_nuevo){
+void Driver :: setpuntos_carrera_driver(float pun_nuevo){
     puntos = pun_nuevo;
+}
+
+void Driver :: sumar_puntos_carrera(float pun_nuevo){
+    puntos += pun_nuevo;
 }
 
 
