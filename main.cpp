@@ -21,7 +21,7 @@ int main(){
     Team_Principal tp1("Cristian Horner", "Inglesa", "Red Bull Racing", 17, 84);
 
     /* Buscar el nombre del piloto #1 del equipo*/
-    Team team1("Oracle Red Bull Racing", driver1, driver2, tp1 , 0.0);
+    Team team1("Oracle Red Bull Racing", driver1, driver2, tp1);
     /* Como aquí regresa un Driver en el get piloto, tienes que definir que quieres del Driver */
     cout << team1.get_piloto1().get_nombre() << endl << endl;
 
@@ -30,6 +30,9 @@ int main(){
     /* Crear el objeto con la lista sin los puntajes */
     Standings standing1(list, 4);
 
+    /* Checar porque se vuelve 0 */
+    standing1.agregrar_team(team1);
+
     Driver driver5("Carlos Sainz", "Español", "Ferarri", 5, 323.5);
     cout << driver5.get_nombre() << endl << endl; 
 
@@ -37,13 +40,37 @@ int main(){
     standing1.agregar_driver(driver5);
 
     cout << "Pilotos sin ordenar por puntos:" << endl;
-    standing1.consultar_driver_standing();
+    standing1.consultar_standing();
     cout << endl;
 
     /* En base a los puntos ordenar la lista del mismo objeto */
     standing1.update_driver_championship();
     cout << "Pilotos ordenado con puntos:" << endl;
-    standing1.consultar_driver_standing();
-    
+    standing1.consultar_standing();
+    cout << endl;
+
+    /* Crear una carrera para probar igual*/
+    Race race1("Mexico", "Autodromo Hermanos Rodriguez", 20, 71, 4.304, standing1);
+    cout << race1.get_cricuit_name() << endl << endl;
+
+    /* Agregar un pioto pero solo a la carrera */
+    Driver driver6("Mick Schumacher", "Alemán", "Haas", 2, 0);
+    race1.agregar_driver(driver6);
+
+    /* Checar si despues de iniciar la carrera se cambiaron a 0 */
+    race1.get_carrera_st().consultar_standing();
+
+    /* Confirmar que original no cambio */
+    cout << endl;
+    standing1.consultar_standing();
+
+    cout << endl << "Puntos hechos en una carrera:" << endl;
+    race1.puntos_carrera();
+    race1.get_carrera_st().consultar_standing();
     return 0;
+    /*En los puntos de la carrera, como los dirvers que tiene el equipo 
+    * son lo que declaran puntos al principio y no los nuevos en 0
+    * te imprime la cantidad anterior. Hay que corregir eso
+    * Buscar insertar a team los drivers que estan en race y carrera_st por ende
+    */
 }
