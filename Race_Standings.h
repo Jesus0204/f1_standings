@@ -23,10 +23,11 @@ class Standings {
         void agregrar_team(Team);
 
         /* Métodos*/
-        void update_driver_championship();
+        void update_championship();
         void consultar_standing();
         void init_puntos_carrera();
         void puntos_carrera();
+        void actualizar_drivers_equipo();
 
 };
 
@@ -66,24 +67,27 @@ void Standings :: agregrar_team(Team nuevo){
     tam_equipo += 1;
 }
 
-void Standings :: update_driver_championship(){
+void Standings :: update_championship(){
     /* Crear una lista temporal para no borrar la original */
     Driver temp[20];
+    Team temp_team[10];
 
-    /* Agregar los pilotos a una lista temporal para ir borrando pilotos */
+    /* Agregar los pilotos y equipos a una lista temporal para ir borrando */
     for (int i = 0; i < tam_driver; i++){
         temp[i] = drivers[i];
     }
+    for (int i = 0; i < tam_equipo; i++){
+        temp_team[i] = equipo[i];
+    }
 
-    /* Como el tamaño va cambiando, crear una lista temporal */
-    int tam_updated = tam_driver;
-    /* Repetir esto por cada elemento de la lista de pilotos*/
+    /* PILOTOS */
+    int tam_updated_d = tam_driver;
     for (int i = 0; i < tam_driver; i++){
         /* Volver a iniciar el máximo para cuando lista sea más chica */
         int index_max = 0;
         float max = temp[0].get_puntos();
-        /* Sacar el puntaje máximo y el indice de la lista de ese puntaje*/
-        for (int j = 0; j < tam_updated; j++){
+        /* Sacar el puntaje máximo y el indice de la lista de ese puntaje */
+        for (int j = 0; j < tam_updated_d; j++){
             if (temp[j].get_puntos() > max){
                 max = temp[j].get_puntos();
                 index_max = j;
@@ -93,10 +97,34 @@ void Standings :: update_driver_championship(){
         drivers[i] = temp[index_max];
 
         /* Actualizar el tamaño de la lista temporal */
-        tam_updated -= 1;
+        tam_updated_d -= 1;
         /* Borras el piloto que fue el máximo para repetir el ciclo */
-        for (int k = index_max; k <= tam_updated; k++){
+        for (int k = index_max; k <= tam_updated_d; k++){
             temp[k] = temp[k+1];
+        }
+    }
+
+    /* EQUIPOS */
+    int tam_updated_e = tam_equipo;
+    for (int i = 0; i < tam_equipo; i++){
+         /* Volver a iniciar el máximo para cuando lista sea más chica */
+        int index_max = 0;
+        float max = temp_team[0].get_puntos_totales();
+        /* Sacar el puntaje máximo y el indice de la lista de ese puntaje */
+        for (int j = 0; j < tam_updated_e; j++){
+            if (temp_team[j].get_puntos_totales() > max){
+                max = temp_team[j].get_puntos_totales();
+                index_max = j;
+            }
+        }
+        /* Agregar el indice donde se encontre el puntaje máximo */
+        equipo[i] = temp_team[index_max];
+
+        /* Actualizar el tamaño de la lista temporal */
+        tam_updated_e -= 1;
+        /* Borras el piloto que fue el máximo para repetir el ciclo */
+        for (int k = index_max; k <= tam_updated_e; k++){
+            temp_team[k] = temp_team[k+1];
         }
     }
 }
@@ -119,6 +147,7 @@ void Standings :: init_puntos_carrera(){
     for (int i = 0; i < tam_driver; i++){
         drivers[i].puntos_carrera_driver(0.0);
     }
+    actualizar_drivers_equipo();
 }
 
 void Standings :: puntos_carrera(){
@@ -144,7 +173,30 @@ void Standings :: puntos_carrera(){
             drivers[i].puntos_carrera_driver(pun);
         }
     }
+    /* Actualizar los drivers de equipos */
+    actualizar_drivers_equipo();
 }
+
+void Standings :: actualizar_drivers_equipo(){
+
+    /* Mete a los pilotos que esta en drivers al equipo para las carreras */
+    for (int i = 0; i < tam_equipo; i++){
+        /* Volver iniciar la lista para cada equipo*/
+        Driver pil[2];
+        int count = 0;
+        for (int j = 0; j < tam_driver; j++){
+            /* Agregar a los dos pilotos */
+            if (equipo[i].get_nombre_eq() == drivers[j].get_escuderia()){
+                pil[count] = drivers[j];
+                count += 1;
+            }
+        }   
+        /* Actualizar los pilotos de objetos teams */
+        equipo[i].actualizar_driver1(pil[0]);
+        equipo[i].actualizar_driver2(pil[1]);
+    }
+}
+
 
 
 class Race {

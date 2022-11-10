@@ -159,6 +159,8 @@ class Team {
         Driver get_piloto2();
         Team_Principal get_name_tp();
         float get_puntos_totales();
+        void actualizar_driver1(Driver);
+        void actualizar_driver2(Driver);
 };
 
 Team :: Team(string nombre, Driver pil1, Driver pil2, Team_Principal teamp){
@@ -192,4 +194,12 @@ float Team :: get_puntos_totales(){
     float punt_dri2 = piloto2.get_puntos();
     puntos_totales = punt_dri1 + punt_dri2;
     return puntos_totales;
+}
+
+void Team :: actualizar_driver1(Driver nuevo){
+    piloto1 = nuevo;
+}
+
+void Team :: actualizar_driver2(Driver nuevo){
+    piloto2 = nuevo;
 }
