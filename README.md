@@ -16,7 +16,7 @@ Como hay muchos tipos de objetos, quiero especificar como va a funcionar cada ti
 
 1. Persona: Este es el molde para cualquier persona del programa. Va a tener nombre, años activos, nacionalidad, escudería y cualquier otra variable que sea útil. 
 2. Piloto: Esta clase hereda de persona, donde ademas se le agrega puntos, y cualquier otra variable que sea útil. 
-3. Team principal: Tambíen hereda de persona, una variable distinta y cualquier otra variable que sea útil. 
+3. Team principal: Tambíen hereda de persona, las wins con ese equipo y cualquier otra variable que sea útil. 
 4. Standings: Una lista de pilotos y una lista de equipos dependiendo de qué tan bien les fue en carrera/campeonato. 
 5. Equipo: Consta de los dos pilotos, el team principal, con puntos totales (de los dos pilotos) y cualquier otra variable que sea útil.
 6. Carrera: Esta clase tiene vueltas, país, nombre del circuito, número de carrera, longitud del circuito y objeto standings de dicha carrera. 
