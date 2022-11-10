@@ -24,8 +24,9 @@ class Standings {
 
         /* Métodos*/
         void update_driver_championship();
-        void consultar_driver_standing();
-        Driver get_drivers();
+        void consultar_standing();
+        void init_puntos_carrera();
+        void puntos_carrera();
 
 };
 
@@ -48,6 +49,7 @@ Standings :: Standings(Driver lista[], int ta){
         drivers[i] = lista[i];
     }
     tam_driver = ta;
+    tam_equipo = 0;
 }
 
 void Standings :: agregar_driver(Driver nuevo){
@@ -99,19 +101,50 @@ void Standings :: update_driver_championship(){
     }
 }
 
-void Standings :: consultar_driver_standing(){
+void Standings :: consultar_standing(){
     for (int i = 0; i < tam_driver; i++){
-        string nom = drivers[i].get_nombre();
-        float pun = drivers[i].get_puntos();
-        cout << i+1 << ". " << nom << ": " << pun << " puntos" << endl;
+        string nom_d = drivers[i].get_nombre();
+        float pun_d = drivers[i].get_puntos();
+        cout << i+1 << ". " << nom_d << ": " << pun_d << " puntos" << endl;
+    }
+    cout << endl;
+    for (int i = 0; i < tam_equipo; i++){
+        string nom_e = equipo[i].get_nombre_eq();
+        float pun_e = equipo[i].get_puntos_totales();
+        cout << i+1 << ". " << nom_e << ": " << pun_e << " puntos" << endl;
     }
 }
 
-/* Solución temporal */
-Driver Standings :: get_drivers(){
-    return drivers[19];
+void Standings :: init_puntos_carrera(){
+    for (int i = 0; i < tam_driver; i++){
+        drivers[i].puntos_carrera_driver(0.0);
+    }
 }
 
+void Standings :: puntos_carrera(){
+    int pun = 25;
+    for (int i = 0; i < tam_driver; i++){
+        if (i == 0){
+            drivers[i].puntos_carrera_driver(pun);
+        }
+        else if (i == 1){
+            pun -= 7;
+            drivers[i].puntos_carrera_driver(pun);
+        }
+        else if (i >= 2 && i <= 3){
+            pun -= 3;
+            drivers[i].puntos_carrera_driver(pun);
+        }
+        else if (i >= 4 && i <= 8){
+            pun -= 2;
+            drivers[i].puntos_carrera_driver(pun);
+        }
+        else if (i == 9){
+            pun -=1;
+            drivers[i].puntos_carrera_driver(pun);
+        }
+    }
+}
 
 
 class Race {
@@ -125,8 +158,8 @@ class Race {
         Standings carrera_st;
     public:
         /* Constructores */
-        Race(): country(""), circuit_name(""), race_num(0), laps(0), circuit_len(0.0){};
-        Race(string coun, string name, int ra_num, int lap, float cir_len): country(coun), circuit_name(name), race_num(ra_num), laps(lap), circuit_len(cir_len) {};
+        Race(): country(""), circuit_name(""), race_num(0), laps(0), circuit_len(0.0), carrera_st(Standings()){};
+        Race(string coun, string cir_name, int ra_num, int lap, float cir_len, Standings sta);
 
         /* Getters */
         string get_country();
@@ -134,9 +167,22 @@ class Race {
         int get_race_num();
         int get_laps();
         float get_circuit_len();
+        Standings get_carrera_st();
+        void agregar_driver(Driver);
+        void agregrar_team(Team);
+        void puntos_carrera();
 
-        
 };
+
+Race :: Race(string coun, string cir_name, int ra_num, int lap, float cir_len, Standings sta){
+    country = coun;
+    circuit_name = cir_name;
+    race_num = ra_num;
+    laps = lap;
+    circuit_len = cir_len;
+    carrera_st = sta;
+    carrera_st.init_puntos_carrera();
+}
 
 string Race :: get_country(){
     return country;
@@ -156,4 +202,20 @@ int Race :: get_laps(){
 
 float Race :: get_circuit_len(){
     return circuit_len;
+}
+
+Standings Race :: get_carrera_st(){
+    return carrera_st;
+}
+
+void Race :: agregar_driver(Driver nuevo){
+    carrera_st.agregar_driver(nuevo);
+}
+
+void Race :: agregrar_team(Team nuevo){
+    carrera_st.agregrar_team(nuevo);
+}
+
+void Race :: puntos_carrera(){
+    carrera_st.puntos_carrera();
 }

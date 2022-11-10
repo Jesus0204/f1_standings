@@ -53,6 +53,7 @@ class Driver: public Persona {
         string get_escuderia();
         int get_activo();
         float get_puntos();
+        void puntos_carrera_driver(float);
 };
 
 Driver :: Driver(){
@@ -89,6 +90,10 @@ int Driver :: get_activo(){
 }
 float Driver :: get_puntos(){
     return puntos;
+}
+
+void Driver :: puntos_carrera_driver(float pun_nuevo){
+    puntos = pun_nuevo;
 }
 
 
@@ -147,8 +152,8 @@ class Team {
         Team_Principal name_tp;
         float puntos_totales;
     public:
-        Team(): nombre_eq(""), piloto1(), piloto2(), name_tp(), puntos_totales(0){};
-        Team(string, Driver, Driver, Team_Principal, float);
+        Team(): nombre_eq(""), piloto1(Driver()), piloto2(Driver()), name_tp(Team_Principal()), puntos_totales(0){};
+        Team(string, Driver, Driver, Team_Principal);
         string get_nombre_eq();
         Driver get_piloto1();
         Driver get_piloto2();
@@ -156,12 +161,14 @@ class Team {
         float get_puntos_totales();
 };
 
-Team :: Team(string nombre, Driver pil1, Driver pil2, Team_Principal teamp, float pun){
+Team :: Team(string nombre, Driver pil1, Driver pil2, Team_Principal teamp){
     nombre_eq = nombre;
     piloto1 = pil1;
     piloto2 = pil2;
     name_tp = teamp;
-    puntos_totales = pun;
+    float punt_dri1 = piloto1.get_puntos();
+    float punt_dri2 = piloto2.get_puntos();
+    puntos_totales = punt_dri1 + punt_dri2;
 }
 
 string Team :: get_nombre_eq(){
@@ -181,5 +188,8 @@ Team_Principal Team :: get_name_tp(){
 }
 
 float Team :: get_puntos_totales(){
+    float punt_dri1 = piloto1.get_puntos();
+    float punt_dri2 = piloto2.get_puntos();
+    puntos_totales = punt_dri1 + punt_dri2;
     return puntos_totales;
 }
