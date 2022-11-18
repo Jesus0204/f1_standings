@@ -48,10 +48,6 @@ class Driver: public Persona {
     public:
         Driver();
         Driver(string, string, string, int, float);
-        string get_nombre();
-        string get_nacionalidad();
-        string get_escuderia();
-        int get_activo();
         float get_puntos();
         void setpuntos_carrera_driver(float);
         void sumar_puntos_carrera(float);
@@ -73,22 +69,6 @@ Driver :: Driver(string nom, string nacio, string esc, int acti, float pun){
     puntos = pun;
 }
 
-string Driver :: get_nombre(){
-    return nombre;
-}
-
-string Driver :: get_nacionalidad(){
-    return nacionalidad;
-}
-
-string Driver :: get_escuderia(){
-    return escuderia;
-}
-
-int Driver :: get_activo(){
-    return activo;
-
-}
 float Driver :: get_puntos(){
     return puntos;
 }
@@ -110,10 +90,7 @@ class Team_Principal: public Persona {
     public:
         Team_Principal();
         Team_Principal(string, string, string, int, int);
-        string get_nombre();
-        string get_nacionalidad();
-        string get_escuderia();
-        int get_activo();
+        int get_triunfos();
 };
 
 Team_Principal :: Team_Principal(){
@@ -132,32 +109,20 @@ Team_Principal :: Team_Principal(string nom, string nacio, string esc, int acti,
     triunfos_tp = wins;
 }
 
-string Team_Principal :: get_nombre(){
-    return nombre;
-}
-
-string Team_Principal :: get_nacionalidad(){
-    return nacionalidad;
-}
-
-string Team_Principal :: get_escuderia(){
-    return escuderia;
-}
-
-int Team_Principal :: get_activo(){
-    return activo;
+int Team_Principal :: get_triunfos(){
+    return triunfos_tp;
 }
 
 
 class Team {
     private:
-        string nombre_eq;
+        string nombre_eq_completo;
         Driver piloto1;
         Driver piloto2;
         Team_Principal name_tp;
         float puntos_totales;
     public:
-        Team(): nombre_eq(""), piloto1(Driver()), piloto2(Driver()), name_tp(Team_Principal()), puntos_totales(0){};
+        Team(): nombre_eq_completo(""), piloto1(Driver()), piloto2(Driver()), name_tp(Team_Principal()), puntos_totales(0){};
         Team(string, Driver, Driver, Team_Principal);
         string get_nombre_eq();
         Driver get_piloto1();
@@ -169,7 +134,7 @@ class Team {
 };
 
 Team :: Team(string nombre, Driver pil1, Driver pil2, Team_Principal teamp){
-    nombre_eq = nombre;
+    nombre_eq_completo = nombre;
     piloto1 = pil1;
     piloto2 = pil2;
     name_tp = teamp;
@@ -179,7 +144,7 @@ Team :: Team(string nombre, Driver pil1, Driver pil2, Team_Principal teamp){
 }
 
 string Team :: get_nombre_eq(){
-    return nombre_eq;
+    return nombre_eq_completo;
 }
 
 Driver Team :: get_piloto1(){

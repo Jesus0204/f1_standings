@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#include "Race_Standings.h"
+#include "Race_Standings_Championship.h"
 
 int main(){
     /* Buscar el nombre de cada piloto */
@@ -63,5 +63,8 @@ int main(){
     cout << endl << "Puntos hechos en una carrera:" << endl;
     race1.puntos_carrera();
     race1.get_carrera_st().consultar_standing();
+
+    Championship champ;
+    champ.get_carrera_st().consultar_standing();
     return 0;
 }
