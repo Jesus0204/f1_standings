@@ -20,5 +20,4 @@ Como hay muchos tipos de objetos, quiero especificar como va a funcionar cada ti
 4. Standings: Una lista de pilotos y una lista de equipos dependiendo de qué tan bien les fue en carrera/campeonato. 
 5. Equipo: Consta de los dos pilotos, el team principal, con puntos totales (de los dos pilotos) y cualquier otra variable que sea útil.
 6. Carrera: Esta clase tiene vueltas, país, nombre del circuito, número de carrera, longitud del circuito y objeto standings de dicha carrera. 
-
-Standings, equipos y carrera tienen de variables los objetos antes mencionados, por lo que se puede volver complicado de modelar, pero con variables claras se debe de poder modelar sin problema. 
+7. Campeonato: Consta de una lista de las carreras de dicha temporada, objeto standings y el tamaño de la lista de carreras. 
