@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#include "Race_Standings_Championship.h"
+#include "Race_Standings.h"
 
 int main(){
     /* Buscar el nombre de cada piloto */

@@ -4,9 +4,6 @@ using namespace std;
 
 #include "Persons&Teams.h"
 
-/* Clase que sirve para demostrar lugares del campeonato, carreras 
-* y también para almacenar a los pilotos y equipos y solo pasar info
-*/
 class Standings {
     private:
         Driver drivers[20];
@@ -220,6 +217,8 @@ class Race {
         int get_laps();
         float get_circuit_len();
         Standings get_carrera_st();
+
+        /* Otros métodos */
         void agregar_driver(Driver);
         void agregrar_team(Team);
         void puntos_carrera();
@@ -270,4 +269,39 @@ void Race :: agregrar_team(Team nuevo){
 
 void Race :: puntos_carrera(){
     carrera_st.set_puntos_carrera();
+}
+
+
+
+
+class Championship {
+    private:
+        int tam_races;
+        Standings carrera_st;
+        Race races [30];
+    public:
+        Championship();
+        Championship(int tam, Standings sta, Race ra []): tam_races(tam), carrera_st(sta){};
+        Standings get_carrera_st();
+        void agregar_race(Race);
+};
+
+Championship :: Championship() {
+    tam_races = 0;
+    Standings carrera_st;
+}
+
+Championship :: Championship(int tam, Standings sta, Race ra[]) {
+    for (int i = 0; i < 0; i++){
+        races[i] = ra[i];
+    }
+}
+
+Standings Championship :: get_carrera_st() {
+    return carrera_st;
+}
+
+void Championship :: agregar_race(Race car) {
+    races[tam_races] = car;
+    tam_races += 1;
 }
