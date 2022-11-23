@@ -1,3 +1,6 @@
+#ifndef PERSONS_TEAMS_H_
+#define PERSONS_TEAMS_H_
+
 #include <iostream>
 
 using namespace std;
@@ -10,64 +13,39 @@ class Persona {
         int activo;
     public:
         Persona(): nombre(""), nacionalidad(""), escuderia(""), activo(0){};
-        Persona(string, string, string, int);
+        Persona(string nom, string nacio, string esc, int acti): nombre(nom), nacionalidad(nacio), escuderia(esc), activo(acti){};
         string get_nombre();
-        string get_nacionalidad();
         string get_escuderia();
-        int get_activo();
+        void print_data();
 };
-
-Persona :: Persona(string nom, string nacio, string esc, int acti){
-    nombre = nom;
-    nacionalidad = nacio;
-    escuderia = esc;
-    activo = acti;
-}
 
 string Persona :: get_nombre(){
     return nombre;
-}
-
-string Persona :: get_nacionalidad(){
-    return nacionalidad;
 }
 
 string Persona :: get_escuderia(){
     return escuderia;
 }
 
-int Persona :: get_activo(){
-    return activo;
+void Persona :: print_data(){
+    cout << "\nSu nombre es: " << nombre;
+    cout << "\nSu nacionalidad es: " << nacionalidad;
+    cout << "\nEstá en la escudería: " << escuderia;
+    cout << "\nLleva " << activo << " años en la Fórmula 1";
 }
-
 
 
 class Driver: public Persona {
     private:
         float puntos;
     public:
-        Driver();
-        Driver(string, string, string, int, float);
+        Driver(): puntos(0.0), Persona(){};
+        Driver(string nom, string nacio, string esc, int acti, float pun): Persona(nom, nacio, esc, acti), puntos(pun){};
         float get_puntos();
         void setpuntos_carrera_driver(float);
         void sumar_puntos_carrera(float);
+        void print_driver();
 };
-
-Driver :: Driver(){
-    nombre = "";
-    nacionalidad = "";
-    escuderia = "";
-    activo = 0;
-    puntos = 0.0;
-}
-
-Driver :: Driver(string nom, string nacio, string esc, int acti, float pun){
-    nombre = nom;
-    nacionalidad = nacio;
-    escuderia = esc;
-    activo = acti;
-    puntos = pun;
-}
 
 float Driver :: get_puntos(){
     return puntos;
@@ -81,6 +59,11 @@ void Driver :: sumar_puntos_carrera(float pun_nuevo){
     puntos += pun_nuevo;
 }
 
+void Driver :: print_driver(){
+    print_data();
+    cout << "\nY actualmente tiene " << puntos << " puntos.\n\n";
+}
+
 
 
 class Team_Principal: public Persona {
@@ -88,29 +71,19 @@ class Team_Principal: public Persona {
     /* Triunfos como team principal */
         int triunfos_tp;
     public:
-        Team_Principal();
-        Team_Principal(string, string, string, int, int);
-        int get_triunfos();
+        Team_Principal(): Persona(), triunfos_tp(0){};
+        Team_Principal(string nom, string nacio, string esc, int acti, int wins): Persona(nom, nacio, esc, acti), triunfos_tp(wins){};
+        void print_team_tp();
+        void sumar_win();
 };
 
-Team_Principal :: Team_Principal(){
-    nombre = "";
-    nacionalidad = "";
-    escuderia = "";
-    activo = 0;
-    triunfos_tp = 0;
+void Team_Principal :: print_team_tp(){
+    print_data();
+    cout << "\nY actualmente tiene " << triunfos_tp << " carreras ganadas como Team principal.\n\n";
 }
 
-Team_Principal :: Team_Principal(string nom, string nacio, string esc, int acti, int wins){
-    nombre = nom;
-    nacionalidad = nacio;
-    escuderia = esc;
-    activo = acti;
-    triunfos_tp = wins;
-}
-
-int Team_Principal :: get_triunfos(){
-    return triunfos_tp;
+void Team_Principal :: sumar_win(){
+    triunfos_tp += 1;
 }
 
 
@@ -125,12 +98,11 @@ class Team {
         Team(): nombre_eq_completo(""), piloto1(Driver()), piloto2(Driver()), name_tp(Team_Principal()), puntos_totales(0){};
         Team(string, Driver, Driver, Team_Principal);
         string get_nombre_eq();
-        Driver get_piloto1();
-        Driver get_piloto2();
-        Team_Principal get_name_tp();
         float get_puntos_totales();
+        void win_tp();
         void actualizar_driver1(Driver);
         void actualizar_driver2(Driver);
+        void print_team();
 };
 
 Team :: Team(string nombre, Driver pil1, Driver pil2, Team_Principal teamp){
@@ -147,23 +119,15 @@ string Team :: get_nombre_eq(){
     return nombre_eq_completo;
 }
 
-Driver Team :: get_piloto1(){
-    return piloto1;
-}
-
-Driver Team :: get_piloto2(){
-    return piloto2;
-}
-
-Team_Principal Team :: get_name_tp(){
-    return name_tp;
-}
-
 float Team :: get_puntos_totales(){
     float punt_dri1 = piloto1.get_puntos();
     float punt_dri2 = piloto2.get_puntos();
     puntos_totales = punt_dri1 + punt_dri2;
     return puntos_totales;
+}
+
+void Team :: win_tp(){
+    name_tp.sumar_win();
 }
 
 void Team :: actualizar_driver1(Driver nuevo){
@@ -173,3 +137,16 @@ void Team :: actualizar_driver1(Driver nuevo){
 void Team :: actualizar_driver2(Driver nuevo){
     piloto2 = nuevo;
 }
+
+void Team :: print_team(){
+    cout << "\nEl nombre completo del equipo es: " << nombre_eq_completo;
+    cout << "\n\nLos datos del piloto #1:";
+    piloto1.print_driver();
+    cout << "\nLos datos del piloto #2:";
+    piloto2.print_driver();
+    cout << "\nLos datos del Team Principal son:";
+    name_tp.print_team_tp();
+    cout << "\nY los puntos totales del equipo son: " << puntos_totales << "\n\n";
+}
+
+#endif
