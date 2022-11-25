@@ -9,14 +9,13 @@ using namespace std;
 
 class Standings {
     protected:
-        Driver drivers[20];
-        Team equipo[10];
+        Driver drivers[50];
+        Team equipo[25];
         int tam_driver;
         int tam_equipo;
     public:
         /* Contructores */
         Standings();
-        Standings(Driver [], int);
 
         Driver get_driver(int);
 
@@ -35,15 +34,6 @@ class Standings {
 
 Standings :: Standings(){
     tam_driver = 0;
-    tam_equipo = 0;
-}
-
-/* Por lo mientras para trabajar con este objeto */
-Standings :: Standings(Driver lista[], int ta){
-    for (int i = 0; i < ta; i++){
-        drivers[i] = lista[i];
-    }
-    tam_driver = ta;
     tam_equipo = 0;
 }
 
@@ -74,12 +64,14 @@ void Standings :: print_drivers(){
 }
 
 void Standings :: consultar_standing(){
+    cout << "\n";
+    cout << "Pilotos: \n";
     for (int i = 0; i < tam_driver; i++){
         string nom_d = drivers[i].get_nombre();
         float pun_d = drivers[i].get_puntos();
         cout << i+1 << ". " << nom_d << ": " << pun_d << " puntos" << endl;
     }
-    cout << endl;
+    cout << endl << "Equipos: " << endl;
     for (int i = 0; i < tam_equipo; i++){
         string nom_e = equipo[i].get_nombre_eq();
         float pun_e = equipo[i].get_puntos_totales();
@@ -89,7 +81,7 @@ void Standings :: consultar_standing(){
 
 void Standings :: update_order_drivers(){
     /* Crear una lista temporal para no borrar la original */
-    Driver temp[20];
+    Driver temp[50];
 
     /* Agregar los pilotos y equipos a una lista temporal para ir borrando */
     for (int i = 0; i < tam_driver; i++){
@@ -123,7 +115,7 @@ void Standings :: update_order_drivers(){
 
 void Standings :: update_order_teams(){
 
-    Team temp_team[10];
+    Team temp_team[25];
 
     for (int i = 0; i < tam_equipo; i++){
         temp_team[i] = equipo[i];
@@ -154,7 +146,7 @@ void Standings :: update_order_teams(){
 }
 
 void Standings :: set_puntos_carrera(){
-    Driver temp[20];
+    Driver temp[50];
     /* Agregar los pilotos y equipos a una lista temporal para ir guardando ahí */
     for (int i = 0; i < tam_driver; i++){
         temp[i] = drivers[i];

@@ -16,41 +16,90 @@ void menu(){
     cout << "7. Salir.\n\n";
 }
 
+/* Poner la lista de los pilotos aquí*/
+Driver lista_driver(int num){
+    Driver driver1("Sergio Perez", "Mexicano", "Oracle Red Bull Racing", 11, 0);
+    Driver driver2("Max Verstappen", "Neerlandes", "Oracle Red Bull Racing", 7, 0);
+    Driver driver3("Sebasian Vettel", "Alemán", "Aston Martin", 15, 0);
+    Driver driver4("Lance Stroll", "Canadiense", "Aston Martin", 0, 0);
+    Driver driver5("Charles Leclerc", "Monagesque", "Ferrari", 6, 0);
+    Driver driver6("Carlos Sainz", "Español", "Ferrari", 5, 0);
+    Driver driver7("Lewis Hamilton", "Inglés", "Mercedes", 15, 0);
+    Driver driver8("George Russell", "Inglés", "Mercedes", 0, 0);
+    Driver driver9("Lando Norris", "Inglés", "McLaren", 6, 0);
+    Driver driver10("Daniel Ricciardo", "Australiano", "McLaren", 5, 0);
+    Driver driver11("Esteban Ocon", "Francés", "Alpine", 11, 0);
+    Driver driver12("Fernando Alonso", "Español", "Alpine", 7, 0);
+    Driver driver13("Yuki Tsunoda", "Japonés", "AlphaTauri", 15, 0);
+    Driver driver14("Pierre Gasly", "Francés", "AlphaTauri", 0, 0);
+    Driver driver15("Zhou Guanyu", "Chino", "Alfa Romeo", 6, 0);
+    Driver driver16("Valtteri Bottas", "Finés", "Alfa Romeo", 11, 0);
+    Driver driver17("Kevin Magnussen", "Danés", "Haas", 7, 0);
+    Driver driver18("Mick Schumacher", "Alemán", "Haas", 15, 0);
+    Driver driver19("Nicholas Latifi", "Canadiense", "Williams", 0, 0);
+    Driver driver20("Alexander Albon", "Tailandés", "Williams", 6, 0);
+
+    Driver lista[20] = {driver1, driver2, driver3, driver4, driver5, driver6, driver7, driver8, driver9, driver10,
+    driver11, driver12, driver13, driver14, driver15, driver16, driver17, driver18, driver19, driver20};
+
+    return lista[num];
+}
+
+/* La lista de team principals que regresa un elemento de la lista */
+Team_Principal lista_team_tp(int num){
+    /* Los datos fueron investigados en Internet y son recientes */
+    Team_Principal tp1("Cristian Horner", "Inglesa", "Oracle Red Bull Racing", 18, 84);
+    Team_Principal tp2("Mike Krack", "Luxemburgués", "Aston Martin", 1, 0);
+    Team_Principal tp3("Mattia Binotto", "Suizo", "Ferrari", 28, 7);
+    Team_Principal tp4("Toto Wolff", "Autriaco", "Mercedes", 10, 114);
+    Team_Principal tp5("Otmar Szafnauer", "Rumano", "Alpine", 1, 0);
+    Team_Principal tp6("Andreas Seidl", "Alemán", "McLaren", 4, 1);
+    Team_Principal tp7("Franz Tost", "Austriaco", "AlphaTauri", 18, 2);
+    Team_Principal tp8("Frederic Vasseur", "Francés", "Alfa Romeo", 6, 0);
+    Team_Principal tp9("Gunther Steiner", "Italiano/Americano", "Haas", 9, 0);
+    Team_Principal tp10("Jost Capito", "Alemán", "Williams", 3, 0);
+
+    Team_Principal lista[10] = {tp1, tp2, tp3, tp4, tp5, tp6, tp7, tp8, tp9, tp10};
+
+    return lista[num];
+}
+
+Team lista_team(int num){
+    /* Crear los equipos con las funciones que estan arriba */
+    Team team1("Oracle Red Bull Racing", lista_driver(0), lista_driver(1), lista_team_tp(0));
+    Team team2("Aston Martin", lista_driver(2), lista_driver(3), lista_team_tp(1));
+    Team team3("Ferrari", lista_driver(4), lista_driver(5), lista_team_tp(2));
+    Team team4("Mercedes", lista_driver(6), lista_driver(7), lista_team_tp(3));
+    Team team5("Alpine", lista_driver(8), lista_driver(9), lista_team_tp(4));
+    Team team6("McLaren", lista_driver(10), lista_driver(11), lista_team_tp(5));
+    Team team7("AlphaTauri", lista_driver(12), lista_driver(13), lista_team_tp(6));
+    Team team8("Alfa Romeo", lista_driver(14), lista_driver(15), lista_team_tp(7));
+    Team team9("Haas", lista_driver(16), lista_driver(17), lista_team_tp(8));
+    Team team10("Williams", lista_driver(18), lista_driver(19), lista_team_tp(9));
+
+    Team lista[10] = {team1, team2, team3, team4, team5, team6, team7, team8, team9, team10};
+
+    return lista[num];
+}
+
 int main(){
 
     Championship championship_2022;
 
-    /* Buscar el nombre de cada piloto */
-    Driver driver1("Sergio Perez", "Mexicano", "Oracle Red Bull Racing", 11, 500);
-    Driver driver2("Max Verstappen", "Neerlandes", "Oracle Red Bull Racing", 7, 617.6);
-    Driver driver3("Sebasian Vettel", "Alemán", "Aston Martin", 15, 217.6);
-    Driver driver4("Charles Leclerc", "Monagesque", "Ferrari", 6, 445.8);
-    Driver driver5("Carlos Sainz", "Español", "Ferrari", 5, 323.5);
-
-    Team_Principal tp1("Cristian Horner", "Inglesa", "Red Bull Racing", 17, 84);
-    Team_Principal tp2("Mattia Binotto", "Suizo", "Ferrari", 7, 15);
-
-    /* Buscar el nombre del piloto #1 del equipo*/
-    Team team1("Oracle Red Bull Racing", driver1, driver2, tp1);
-    Team team2("Ferrari", driver4, driver5, tp2);
-    Driver list[5] = {driver1, driver2, driver3, driver4, driver5};
-    
     /* Crear el objeto con la lista sin los puntajes */
-    Standings standing_limpio(list, 5);
-    standing_limpio.agregar_team(team1);
-    /* Agregar piloto y equipo para probar el método */
-    standing_limpio.agregar_team(team2);
+    Standings standing_limpio;
 
-    Race ra1("Mexico", "Autodromo Hermanos Rodriguez", 1, 71, 4.304, standing_limpio);
-    championship_2022.agregar_race(ra1);
-    championship_2022.agregar_team(team1);
-    championship_2022.agregar_team(team2);
+    /* Agregar todos los pilotos a championship y al standing */
+    for (int i = 0; i < 20; i++){
+        championship_2022.agregar_driver(lista_driver(i));
+        standing_limpio.agregar_driver(lista_driver(i));
+    }
 
-    championship_2022.agregar_driver(driver1);
-    championship_2022.agregar_driver(driver2);
-    championship_2022.agregar_driver(driver3);
-    championship_2022.agregar_driver(driver4);
-    championship_2022.agregar_driver(driver5);
+    /* Agregrar todos los equipos a championship y al standing */
+    for (int i = 0; i < 10; i++){
+        championship_2022.agregar_team(lista_team(i));
+        standing_limpio.agregar_team(lista_team(i));
+    }
 
     cout << "\nBienvenido a la calculadora oficial de campeonatos de F1©! Comenzemos!!\n";
 
@@ -134,6 +183,4 @@ int main(){
     cout << "Gracias por usar el programa!!! \n";
 
     return 0;
-
-    // Checar si funcionan los constructores por default cuando los uso en otra clase
 }
