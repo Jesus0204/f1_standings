@@ -166,7 +166,7 @@ void Standings :: set_puntos_carrera(){
             cin >> pil_op;
             cout << "\n";
 
-            if (pil_op <= tam_driver) {
+            if (pil_op <= tam_driver && pil_op > 0) {
                 check = false;
             }
         }
@@ -292,7 +292,7 @@ void Race :: print_datos(){
 class Championship: public Standings {
     private:
         int tam_races;
-        Race races [30];
+        Race races[30];
     public:
         /* Constructor, getters y setters */
         Championship(): Standings(), tam_races(0){};
