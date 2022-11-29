@@ -162,7 +162,7 @@ void Standings :: set_puntos_carrera(){
         while (check == true){
             print_drivers();
             cout << "\nPor favor checa que el número que escribiste sea una opción antes de escribir algo. \n";
-            cout << "\nEscribe el piloto que quedo en lugar " << count +1 << ": ";
+            cout << "\nEscribe el nuumero del piloto que quedo en lugar " << count +1 << ": ";
             cin >> pil_op;
             cout << "\n";
 

@@ -18,26 +18,26 @@ void menu(){
 
 /* Poner la lista de los pilotos aquí*/
 Driver lista_driver(int num){
-    Driver driver1("Sergio Perez", "Mexicano", "Oracle Red Bull Racing", 11, 0);
-    Driver driver2("Max Verstappen", "Neerlandes", "Oracle Red Bull Racing", 7, 0);
-    Driver driver3("Sebasian Vettel", "Alemán", "Aston Martin", 15, 0);
-    Driver driver4("Lance Stroll", "Canadiense", "Aston Martin", 0, 0);
-    Driver driver5("Charles Leclerc", "Monagesque", "Ferrari", 6, 0);
-    Driver driver6("Carlos Sainz", "Español", "Ferrari", 5, 0);
+    Driver driver1("Sergio Perez", "Mexicano", "Oracle Red Bull Racing", 12, 0);
+    Driver driver2("Max Verstappen", "Neerlandes", "Oracle Red Bull Racing", 8, 0);
+    Driver driver3("Sebasian Vettel", "Alemán", "Aston Martin", 16, 0);
+    Driver driver4("Lance Stroll", "Canadiense", "Aston Martin", 6, 0);
+    Driver driver5("Charles Leclerc", "Monagesque", "Ferrari", 5, 0);
+    Driver driver6("Carlos Sainz", "Español", "Ferrari", 8, 0);
     Driver driver7("Lewis Hamilton", "Inglés", "Mercedes", 15, 0);
-    Driver driver8("George Russell", "Inglés", "Mercedes", 0, 0);
-    Driver driver9("Lando Norris", "Inglés", "McLaren", 6, 0);
-    Driver driver10("Daniel Ricciardo", "Australiano", "McLaren", 5, 0);
-    Driver driver11("Esteban Ocon", "Francés", "Alpine", 11, 0);
-    Driver driver12("Fernando Alonso", "Español", "Alpine", 7, 0);
-    Driver driver13("Yuki Tsunoda", "Japonés", "AlphaTauri", 15, 0);
-    Driver driver14("Pierre Gasly", "Francés", "AlphaTauri", 0, 0);
-    Driver driver15("Zhou Guanyu", "Chino", "Alfa Romeo", 6, 0);
-    Driver driver16("Valtteri Bottas", "Finés", "Alfa Romeo", 11, 0);
-    Driver driver17("Kevin Magnussen", "Danés", "Haas", 7, 0);
-    Driver driver18("Mick Schumacher", "Alemán", "Haas", 15, 0);
-    Driver driver19("Nicholas Latifi", "Canadiense", "Williams", 0, 0);
-    Driver driver20("Alexander Albon", "Tailandés", "Williams", 6, 0);
+    Driver driver8("George Russell", "Inglés", "Mercedes", 4, 0);
+    Driver driver9("Lando Norris", "Inglés", "McLaren", 4, 0);
+    Driver driver10("Daniel Ricciardo", "Australiano", "McLaren", 12, 0);
+    Driver driver11("Esteban Ocon", "Francés", "Alpine", 7, 0);
+    Driver driver12("Fernando Alonso", "Español", "Alpine", 19, 0);
+    Driver driver13("Yuki Tsunoda", "Japonés", "AlphaTauri", 2, 0);
+    Driver driver14("Pierre Gasly", "Francés", "AlphaTauri", 6, 0);
+    Driver driver15("Zhou Guanyu", "Chino", "Alfa Romeo", 1, 0);
+    Driver driver16("Valtteri Bottas", "Finés", "Alfa Romeo", 10, 0);
+    Driver driver17("Kevin Magnussen", "Danés", "Haas", 8, 0);
+    Driver driver18("Mick Schumacher", "Alemán", "Haas", 2, 0);
+    Driver driver19("Nicholas Latifi", "Canadiense", "Williams", 3, 0);
+    Driver driver20("Alexander Albon", "Tailandés", "Williams", 3, 0);
 
     Driver lista[20] = {driver1, driver2, driver3, driver4, driver5, driver6, driver7, driver8, driver9, driver10,
     driver11, driver12, driver13, driver14, driver15, driver16, driver17, driver18, driver19, driver20};
