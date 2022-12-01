@@ -1,9 +1,23 @@
-#include <iostream>
+/*
+ * Proyecto Calculadora Campeonato de Formula 1
+ * Jesús Alejandro Cedillo Zertuche
+ * A01705442
+ * 2/11/2022
+ */
 
+/*
+ * Este es un proyecto para la clase de Pensamiento
+ * Computacional Orientado a Objetos. Es un programa que captura
+ * carreras que pasaron en la Formula 1 conforme pasa la temporada y 
+ * permite calcular los lugares de cada piloto.
+ */
+
+// Biblotecas
+#include <iostream>
+#include "Race_Standings.h"
 using namespace std;
 
-#include "Race_Standings.h"
-
+// Procedimiento menu
 void menu(){
     /* Imprimir el menu */
     cout << "\nMenu:\n";
@@ -14,6 +28,7 @@ void menu(){
     cout << "5. Consultar carrera.\n";
     cout << "6. Consultar cada carrera del campeonato. \n";
     cout << "7. Salir.\n\n";
+    
 }
 
 /* Poner la lista de los pilotos aquí*/
@@ -64,6 +79,7 @@ Team_Principal lista_team_tp(int num){
     return lista[num];
 }
 
+/* La lista de los equipos usando las funciones anteriores para los pilotos y team principals */
 Team lista_team(int num){
     /* Crear los equipos con las funciones que estan arriba */
     Team team1("Oracle Red Bull Racing", lista_driver(0), lista_driver(1), lista_team_tp(0));
@@ -86,16 +102,18 @@ int main(){
 
     Championship championship_2022;
 
-    /* Crear el objeto con la lista sin los puntajes */
+    /* Crear el objeto con la lista sin los puntajes
+    * Este objeto es el que se imrpime al crear las carreras
+    */
     Standings standing_limpio;
 
-    /* Agregar todos los pilotos a championship y al standing */
+    // Agregar todos los pilotos a championship y al standing
     for (int i = 0; i < 20; i++){
         championship_2022.agregar_driver(lista_driver(i));
         standing_limpio.agregar_driver(lista_driver(i));
     }
 
-    /* Agregrar todos los equipos a championship y al standing */
+    // Agregrar todos los equipos a championship y al standing
     for (int i = 0; i < 10; i++){
         championship_2022.agregar_team(lista_team(i));
         standing_limpio.agregar_team(lista_team(i));
@@ -103,20 +121,24 @@ int main(){
 
     cout << "\nBienvenido a la calculadora oficial de campeonatos de F1©! Comenzemos!!\n";
 
-    int opcion = 1;
+    int opcion = 1, ra_num = 0, lap = 0;
     string pais, nom_cir;
-    int ra_num = 0, lap = 0;
     float cir_len;
+
+    // Ciclo para que solo corra con ciertas opciones
     while (opcion >= 1 && opcion <= 6){
+        // Imprimir el menu
         menu();
         cout << "Opción: ";
+        // Tomar el input del usuario
         cin >> opcion;
-
+        
+        // En base al input sigue un procedimiento
         switch (opcion){
+            // Caso 1 que agrega una carrera
             case 1: {
-                // Checar porque no funiona string con espacios!!!!
                 cout << "\nEscribe el país donde se corrió: ";
-                /* Solución para sacar input con espacio sacado de https://www.geeksforgeeks.org/problem-with-getline-after-cin/ */
+                // Solución para sacar input con espacio sacado de https://www.geeksforgeeks.org/problem-with-getline-after-cin/ 
                 getline(cin >> ws, pais);
                 cout << "\nEscribe el nombre del circuito: ";
                 getline(cin >> ws, nom_cir);
@@ -137,13 +159,15 @@ int main(){
                 break;
             }
 
+            // Caso 2 que imprime el campeonato con los datos actuales
             case 2:
-                /* Actualizar la lista en base a los puntos e imprimirlo con la función */
+                // Actualizar la lista en base a los puntos e imprimirlo con la función
                 championship_2022.update_order_drivers();
                 championship_2022.update_order_teams();
                 championship_2022.consultar_standing();
                 break;
 
+            // Caso 3 que imprime información de un equipo
             case 3: 
                 cout << "\nEstos son los equipos que puedes elegir. Por favor escoge el numero de dicho equipo. \n";
                 championship_2022.print_teams();
@@ -153,7 +177,8 @@ int main(){
                 cin >> eq;
                 championship_2022.consultar_team(eq);
                 break;
-
+            
+            // Caso 4 que imprime información de un piloto
             case 4: 
                 cout << "\nEstos son los pilotos que puedes elegir. Por favor escoge el número de dicho piloto. \n";
                 championship_2022.print_drivers();
@@ -164,18 +189,21 @@ int main(){
                 championship_2022.consultar_driver(pil);
                 break;
 
+            // Caso 5 que imprime un cierto numero de carrera
             case 5: {
-                /* Pedir el numero de carrera para consutar sus datos */
+                // Pedir el numero de carrera para consutar sus datos
                 cout << "\nEscribe el número de carrera que quieres buscar: ";
                 int carrera_num;
                 cin >> carrera_num;
 
-                /* Imprimir los datos de la carrera */
+                // Imprimir los datos de la carrera
                 championship_2022.consultar_race(carrera_num);
                 break;
             }
+
+            // Caso 6 que imprime todas las carreras del campeonato
             case 6:
-                /* Imprimir todos los datos de todas las carreras */
+                // Imprimir todos los datos de todas las carreras
                 championship_2022.print_races();
         }
     }
